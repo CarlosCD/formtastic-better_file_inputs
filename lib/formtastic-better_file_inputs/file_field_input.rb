@@ -20,11 +20,15 @@ class FileFieldInput < Formtastic::Inputs::FileInput
   end
 
   def existing_file_info
-    if @url = builder.object.send(method).url
-      preview << remove_checkbox << url_display
-    else
-      ''
+    result = ''
+
+    if source = builder.object.send(method)
+      if @url = source.url
+        result = preview << remove_checkbox << url_display
+      end
     end
+
+    result
   end
 
   def div_wrapper
