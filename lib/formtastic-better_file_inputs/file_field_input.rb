@@ -23,7 +23,7 @@ class FileFieldInput < Formtastic::Inputs::FileInput
     result = ''
 
     if source = builder.object.send(method)
-      if @url = source.url
+      if source.respond_to?(:url) and @url = source.url
         result = preview << remove_checkbox << url_display
       end
     end
